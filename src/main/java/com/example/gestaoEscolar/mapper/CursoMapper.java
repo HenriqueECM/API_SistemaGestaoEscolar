@@ -3,7 +3,9 @@ package com.example.gestaoEscolar.mapper;
 import com.example.gestaoEscolar.dto.curso.CriarRequisicaoCursoDto;
 import com.example.gestaoEscolar.dto.curso.CriarRespostaCursoDto;
 import com.example.gestaoEscolar.model.Curso;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CursoMapper {
     public Curso paraEntidade(CriarRequisicaoCursoDto requisicaoDto){
         return new Curso(requisicaoDto.nome(), requisicaoDto.codigo());

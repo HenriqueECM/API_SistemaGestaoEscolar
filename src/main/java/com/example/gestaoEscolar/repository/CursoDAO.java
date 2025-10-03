@@ -2,11 +2,13 @@ package com.example.gestaoEscolar.repository;
 
 import com.example.gestaoEscolar.database.Conexao;
 import com.example.gestaoEscolar.model.Curso;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class CursoDAO {
     public Curso create (Curso curso) throws SQLException{
         String query = "INSERT INTO curso (nome, codigo) VALUES (?,?)";

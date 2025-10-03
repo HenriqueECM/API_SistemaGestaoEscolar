@@ -1,4 +1,6 @@
 package com.example.gestaoEscolar.dto.aluno;
 
-public record CriarRequisaoAlunoDto() {
+import java.time.LocalDate;
+
+public record CriarRequisaoAlunoDto(String nome, String email, String matricula, LocalDate dataNascimento) {
 }

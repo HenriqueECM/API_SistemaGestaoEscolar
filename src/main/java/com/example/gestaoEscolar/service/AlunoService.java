@@ -5,11 +5,13 @@ import com.example.gestaoEscolar.dto.aluno.CriarRespostaAlunoDto;
 import com.example.gestaoEscolar.mapper.AlunoMapper;
 import com.example.gestaoEscolar.model.Aluno;
 import com.example.gestaoEscolar.repository.AlunoDAO;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class AlunoService {
     private final AlunoDAO repository;
     private final AlunoMapper mapper;

@@ -2,12 +2,14 @@ package com.example.gestaoEscolar.repository;
 
 import com.example.gestaoEscolar.database.Conexao;
 import com.example.gestaoEscolar.model.Aluno;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class AlunoDAO {
     // POST
     public Aluno create (Aluno aluno) throws SQLException {

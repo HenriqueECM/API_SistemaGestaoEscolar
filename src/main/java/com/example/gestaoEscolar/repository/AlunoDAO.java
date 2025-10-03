@@ -16,12 +16,13 @@ public class AlunoDAO {
         String query = "INSERT INTO aluno (nome, email, matricula, data_nascimento) VALUES (?,?,?,?)";
 
         try(Connection conn = Conexao.conexao();
-            PreparedStatement stmt = conn.prepareStatement(query, Statement.NO_GENERATED_KEYS)){
+            PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)){
 
             stmt.setString(1, aluno.getNome());
             stmt.setString(2, aluno.getEmail());
             stmt.setString(3, aluno.getMatricula());
             stmt.setDate(4, Date.valueOf(aluno.getDataNascimento()));
+
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
@@ -50,7 +51,7 @@ public class AlunoDAO {
                 String nome = rs.getString("nome");
                 String email = rs.getString("email");
                 String matricula = rs.getString("matricula");
-                LocalDate dataNascimento = rs.getDate("data_nascimentp").toLocalDate();
+                LocalDate dataNascimento = rs.getDate("data_nascimento").toLocalDate();
 
                 var aluno = new Aluno(id, nome, email, matricula, dataNascimento);
                 alunoList.add(aluno);

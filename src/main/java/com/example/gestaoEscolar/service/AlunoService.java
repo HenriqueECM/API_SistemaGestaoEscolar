@@ -22,10 +22,6 @@ public class AlunoService {
     }
 
     public CriarRespostaAlunoDto create (CriarRequisaoAlunoDto requisaoAlunoDto) throws SQLException {
-        if (!repository.verificarExistencia(requisaoAlunoDto.email())){
-            throw new RuntimeException("O Aluno já existe!");
-        }
-
         return mapper.paraResposta(repository.create(mapper.paraEntidade(requisaoAlunoDto)));
     }
 

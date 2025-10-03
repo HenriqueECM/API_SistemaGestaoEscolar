@@ -3,7 +3,9 @@ package com.example.gestaoEscolar.mapper;
 import com.example.gestaoEscolar.dto.turma.CriarRequisicaoTurmaDto;
 import com.example.gestaoEscolar.dto.turma.CriarRespostaTurmaDto;
 import com.example.gestaoEscolar.model.Turma;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TurmaMapper {
     public Turma paraEntidade(CriarRequisicaoTurmaDto requisicaoDto){
         return new Turma(requisicaoDto.cursoId(), requisicaoDto.professorId(), requisicaoDto.nome());

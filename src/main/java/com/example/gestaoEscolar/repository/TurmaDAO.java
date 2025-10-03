@@ -2,6 +2,7 @@ package com.example.gestaoEscolar.repository;
 
 import com.example.gestaoEscolar.database.Conexao;
 import com.example.gestaoEscolar.model.Turma;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class TurmaDAO {
     public Turma create (Turma turma) throws SQLException {
         String query = "INSERT INTO turma (nome, curso_id, professor_id) VALUES (?,?,?)";

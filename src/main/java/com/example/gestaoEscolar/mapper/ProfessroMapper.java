@@ -3,7 +3,9 @@ package com.example.gestaoEscolar.mapper;
 import com.example.gestaoEscolar.dto.professor.CriarRequisicaoProfessorDto;
 import com.example.gestaoEscolar.dto.professor.CriarRespostaProfessorDto;
 import com.example.gestaoEscolar.model.Professor;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProfessroMapper {
     public Professor paraEntidade(CriarRequisicaoProfessorDto requisicaoProfessorDto){
         return new Professor(requisicaoProfessorDto.nome(), requisicaoProfessorDto.email(), requisicaoProfessorDto.disciplina());

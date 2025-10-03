@@ -2,11 +2,13 @@ package com.example.gestaoEscolar.repository;
 
 import com.example.gestaoEscolar.database.Conexao;
 import com.example.gestaoEscolar.model.Professor;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class ProfessorDAO {
     public Professor create (Professor professor) throws SQLException {
         String query = "INSERT INTO professor (nome, email, disciplina) VALUES (?,?,?)";
@@ -32,7 +34,7 @@ public class ProfessorDAO {
     public List<Professor> buscarTodos() throws SQLException {
         List<Professor> professorList = new ArrayList<>();
 
-        String query = "SELECT id, nome, email, disciplina FROM professro";
+        String query = "SELECT id, nome, email, disciplina FROM professor";
 
         try (Connection conn = Conexao.conexao();
         PreparedStatement stmt = conn.prepareStatement(query)){
@@ -70,9 +72,11 @@ public class ProfessorDAO {
                 nome = rs.getString("nome");
                 email = rs.getString("email");
                 disciplina = rs.getString("disciplina");
+
+                return new Professor(newId, nome, email, disciplina);
             }
         }
-        return new Professor(newId, nome, email, disciplina);
+        return null;
     }
 
     public boolean verificarExistencia (int id) throws SQLException {

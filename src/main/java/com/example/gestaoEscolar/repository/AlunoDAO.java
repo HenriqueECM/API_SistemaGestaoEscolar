@@ -82,9 +82,10 @@ public class AlunoDAO {
                 email = rs.getString("email");
                 matricula = rs.getString("matricula");
                 dataNascimento = rs.getDate("data_nascimento").toLocalDate();
+                return new Aluno(NewId, nome, email, matricula, dataNascimento);
             }
         }
-        return new Aluno(NewId, nome, email, matricula, dataNascimento);
+        return null;
     }
 
     // VERIFICAR EXISTENCIA POR EMAIL

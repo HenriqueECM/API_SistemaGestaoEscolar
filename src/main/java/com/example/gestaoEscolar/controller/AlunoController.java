@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Aluno")
+@RequestMapping("/alunos")
 public class AlunoController {
     private final AlunoService service;
 

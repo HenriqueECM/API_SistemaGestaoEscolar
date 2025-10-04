@@ -1,4 +1,10 @@
 package com.example.gestaoEscolar.dto.curso;
 
-public record CriarRequisicaoCursoDto(String nome, String codigo) {
+import java.util.List;
+
+public record CriarRequisicaoCursoDto(
+        String nome,
+        String codigo
+//        List<Integer> alunosIds
+) {
 }

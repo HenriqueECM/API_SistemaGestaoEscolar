@@ -105,4 +105,24 @@ public class TurmaDAO {
         }
         return null;
     }
+
+    public Turma buscaTurmaPorCurso(int idCurso) throws SQLException {
+        String query = "SELECT id, curso_id, professor_id FROM turma WHERE curso_id = ?";
+        try (Connection conn = Conexao.conexao();
+        PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setInt(1, idCurso);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()){
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                int newCursoId = rs.getInt("curso_id");
+                int professorId = rs.getInt("professor_id");
+
+                return new Turma(id, newCursoId, professorId, nome);
+            }
+        }
+        return null;
+    }
 }

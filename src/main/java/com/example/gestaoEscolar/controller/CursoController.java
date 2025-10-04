@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/curso")
+@RequestMapping("/cursos")
 public class CursoController {
     private final CursoService service;
 

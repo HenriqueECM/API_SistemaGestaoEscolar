@@ -61,4 +61,14 @@ public class TurmaService {
 
         return mapper.paraResposta(turma);
     }
+
+    public CriarRespostaTurmaDto buscarTurmasPorCurso(int idCurso) throws SQLException {
+        Turma turma = repository.buscaTurmaPorCurso(idCurso);
+
+        if (turma == null){
+            throw new RuntimeException("Curso ID " + idCurso + " não encontrado");
+        }
+
+        return mapper.paraResposta(turma);
+    }
 }

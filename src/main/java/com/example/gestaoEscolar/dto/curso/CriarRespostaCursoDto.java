@@ -5,7 +5,7 @@ import java.util.List;
 public record CriarRespostaCursoDto(
         int id,
         String nome,
-        String codigo
-//        List<String> listaAlunos
+        String codigo,
+        List<String> listaProfessores
 ) {
 }

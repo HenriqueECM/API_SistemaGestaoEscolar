@@ -21,10 +21,14 @@ public class CursoService {
         this.mapper = mapper;
     }
 
+    // METODO CREATE
     public CriarRespostaCursoDto create (CriarRequisicaoCursoDto requisicaoCursoDto) throws SQLException {
-        return mapper.paraResposta(repository.create(mapper.paraEntidade(requisicaoCursoDto)));
+        List<String> nomeProfessores = repository.listaProfessoresNome(requisicaoCursoDto.listaProfessorIds());
+
+        return mapper.paraResposta(repository.create(mapper.paraEntidade(requisicaoCursoDto)), nomeProfessores);
     }
 
+    // METODO UPDATE
     public CriarRespostaCursoDto update (int id, CriarRequisicaoCursoDto requisicaoCursoDto) throws SQLException {
         Curso curso = repository.buscarPorId(id);
 
@@ -32,9 +36,10 @@ public class CursoService {
             throw new RuntimeException("Curso ID " + id + " não encontrado");
         }
 
-        return mapper.paraResposta(repository.update(mapper.verificarUpdate(requisicaoCursoDto, curso)));
+        return mapper.paraResposta(repository.update(mapper.verificarUpdate(requisicaoCursoDto, curso)), null);
     }
 
+    // METODO DELETE
     public void delete (int id) throws SQLException {
         if (!repository.verificarExistencia(id)){
             throw new RuntimeException("Curso ID " + id + " não encontrado");
@@ -43,6 +48,7 @@ public class CursoService {
         repository.delete(id);
     }
 
+    // METODO BUSCAR POR ID
     public CriarRespostaCursoDto buscarPorId(int id) throws SQLException {
         Curso curso = repository.buscarPorId(id);
 
@@ -50,15 +56,16 @@ public class CursoService {
             throw new RuntimeException("Curso ID " + id + " não encontrado");
         }
 
-        return mapper.paraResposta(curso);
+        return mapper.paraResposta(curso, null);
     }
 
+    // METODO BUSCAR TODOS
     public List<CriarRespostaCursoDto> buscarTodos() throws SQLException {
         List<Curso> cursoList = repository.buscarTodos();
         List<CriarRespostaCursoDto> respostaCursoDtos = new ArrayList<>();
 
         cursoList.forEach(curso -> {
-            respostaCursoDtos.add(mapper.paraResposta(curso));
+            respostaCursoDtos.add(mapper.paraResposta(curso, null));
         });
         return respostaCursoDtos;
     }

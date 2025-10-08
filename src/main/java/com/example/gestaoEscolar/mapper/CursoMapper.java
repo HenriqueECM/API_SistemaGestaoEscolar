@@ -3,6 +3,9 @@ package com.example.gestaoEscolar.mapper;
 import com.example.gestaoEscolar.dto.curso.CriarRequisicaoCursoDto;
 import com.example.gestaoEscolar.dto.curso.CriarRespostaCursoDto;
 import com.example.gestaoEscolar.model.Curso;
+
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,7 +26,7 @@ public class CursoMapper {
         return curso;
     }
 
-    public CriarRespostaCursoDto paraResposta(Curso curso){
-        return new CriarRespostaCursoDto(curso.getId(), curso.getNome(), curso.getCodigo());
+    public CriarRespostaCursoDto paraResposta(Curso curso, List<String> professores){
+        return new CriarRespostaCursoDto(curso.getId(), curso.getNome(), curso.getCodigo(), professores);
     }
 }

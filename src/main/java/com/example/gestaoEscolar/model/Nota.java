@@ -16,7 +16,7 @@ public class Nota {
         this.aulaId = aulaId;
         this.valor = valor;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -41,6 +41,4 @@ public class Nota {
     public void setValor(double valor) {
         this.valor = valor;
     }
-
-
 }

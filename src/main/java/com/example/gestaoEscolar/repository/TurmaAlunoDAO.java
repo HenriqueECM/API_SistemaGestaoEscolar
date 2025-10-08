@@ -6,7 +6,6 @@ import com.example.gestaoEscolar.model.TurmaAluno;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class TurmaAlunoDAO {
     public TurmaAluno create (TurmaAluno turmaAluno) throws SQLException {

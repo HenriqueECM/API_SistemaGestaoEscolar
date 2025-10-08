@@ -1,7 +1,7 @@
 package com.example.gestaoEscolar.service;
 
-import com.example.gestaoEscolar.dto.curso.CriarRequisicaoCursoDto;
-import com.example.gestaoEscolar.dto.curso.CriarRespostaCursoDto;
+import com.example.gestaoEscolar.dto.request.CriarRequisicaoCursoDto;
+import com.example.gestaoEscolar.dto.response.CriarRespostaCursoDto;
 import com.example.gestaoEscolar.mapper.CursoMapper;
 import com.example.gestaoEscolar.model.Curso;
 import com.example.gestaoEscolar.repository.CursoDAO;

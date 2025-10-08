@@ -1,4 +1,4 @@
-package com.example.gestaoEscolar.dto.curso;
+package com.example.gestaoEscolar.dto.request;
 
 import java.util.List;
 

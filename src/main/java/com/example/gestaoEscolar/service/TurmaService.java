@@ -1,7 +1,7 @@
 package com.example.gestaoEscolar.service;
 
-import com.example.gestaoEscolar.dto.turma.CriarRequisicaoTurmaDto;
-import com.example.gestaoEscolar.dto.turma.CriarRespostaTurmaDto;
+import com.example.gestaoEscolar.dto.request.CriarRequisicaoTurmaDto;
+import com.example.gestaoEscolar.dto.response.CriarRespostaTurmaDto;
 import com.example.gestaoEscolar.mapper.TurmaMapper;
 import com.example.gestaoEscolar.model.Turma;
 import com.example.gestaoEscolar.repository.TurmaDAO;

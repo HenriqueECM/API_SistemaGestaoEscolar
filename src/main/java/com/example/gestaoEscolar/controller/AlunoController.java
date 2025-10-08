@@ -1,8 +1,9 @@
 package com.example.gestaoEscolar.controller;
 
-import com.example.gestaoEscolar.dto.aluno.CriarRequisaoAlunoDto;
-import com.example.gestaoEscolar.dto.aluno.CriarRespostaAlunoDto;
+import com.example.gestaoEscolar.dto.request.CriarRequisaoAlunoDto;
+import com.example.gestaoEscolar.dto.response.CriarRespostaAlunoDto;
 import com.example.gestaoEscolar.service.AlunoService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class AlunoController {
     }
 
     @PostMapping
-    public ResponseEntity<CriarRespostaAlunoDto> create (@RequestBody CriarRequisaoAlunoDto requisaoAlunoDto){
+    public ResponseEntity<CriarRespostaAlunoDto> create (@Valid @RequestBody CriarRequisaoAlunoDto requisaoAlunoDto){
         try{
             return ResponseEntity.status(HttpStatus.CREATED).body(service.create(requisaoAlunoDto));
 

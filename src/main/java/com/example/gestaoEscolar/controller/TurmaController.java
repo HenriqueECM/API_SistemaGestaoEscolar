@@ -1,7 +1,7 @@
 package com.example.gestaoEscolar.controller;
 
-import com.example.gestaoEscolar.dto.turma.CriarRequisicaoTurmaDto;
-import com.example.gestaoEscolar.dto.turma.CriarRespostaTurmaDto;
+import com.example.gestaoEscolar.dto.request.CriarRequisicaoTurmaDto;
+import com.example.gestaoEscolar.dto.response.CriarRespostaTurmaDto;
 import com.example.gestaoEscolar.service.TurmaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

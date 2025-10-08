@@ -1,7 +1,7 @@
 package com.example.gestaoEscolar.service;
 
-import com.example.gestaoEscolar.dto.aluno.CriarRequisaoAlunoDto;
-import com.example.gestaoEscolar.dto.aluno.CriarRespostaAlunoDto;
+import com.example.gestaoEscolar.dto.request.CriarRequisaoAlunoDto;
+import com.example.gestaoEscolar.dto.response.CriarRespostaAlunoDto;
 import com.example.gestaoEscolar.mapper.AlunoMapper;
 import com.example.gestaoEscolar.model.Aluno;
 import com.example.gestaoEscolar.repository.AlunoDAO;

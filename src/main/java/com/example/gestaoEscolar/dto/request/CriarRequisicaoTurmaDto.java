@@ -1,4 +1,4 @@
-package com.example.gestaoEscolar.dto.turma;
+package com.example.gestaoEscolar.dto.request;
 
 public record CriarRequisicaoTurmaDto(
         int cursoId,

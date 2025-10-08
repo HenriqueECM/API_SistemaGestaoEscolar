@@ -3,19 +3,19 @@ package com.example.gestaoEscolar.model;
 import java.time.LocalDateTime;
 
 public class Aula {
-    private int id, turmaId;
+    private int id, turma_id;
     private LocalDateTime dataHora;
     private String assunto;
 
-    public Aula(int turmaId, LocalDateTime dataHora, String assunto) {
-        this.turmaId = turmaId;
+    public Aula(int id, int turma_id, LocalDateTime dataHora, String assunto) {
+        this.id = id;
+        this.turma_id = turma_id;
         this.dataHora = dataHora;
         this.assunto = assunto;
     }
 
-    public Aula(int id, int turmaId, LocalDateTime dataHora, String assunto) {
-        this.id = id;
-        this.turmaId = turmaId;
+    public Aula(int turma_id, LocalDateTime dataHora, String assunto) {
+        this.turma_id = turma_id;
         this.dataHora = dataHora;
         this.assunto = assunto;
     }
@@ -28,12 +28,12 @@ public class Aula {
         this.id = id;
     }
 
-    public int getTurmaId() {
-        return turmaId;
+    public int getTurma_id() {
+        return turma_id;
     }
 
-    public void setTurmaId(int turmaId) {
-        this.turmaId = turmaId;
+    public void setTurma_id(int turma_id) {
+        this.turma_id = turma_id;
     }
 
     public LocalDateTime getDataHora() {
@@ -51,5 +51,4 @@ public class Aula {
     public void setAssunto(String assunto) {
         this.assunto = assunto;
     }
-
 }

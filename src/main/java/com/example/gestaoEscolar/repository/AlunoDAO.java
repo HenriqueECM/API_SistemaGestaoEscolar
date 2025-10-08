@@ -88,23 +88,6 @@ public class AlunoDAO {
         return null;
     }
 
-    // VERIFICAR EXISTENCIA POR EMAIL
-    public boolean verificarExistencia(String email) throws SQLException{
-        String query = "SELECT id FROM aluno WHERE email = ?";
-
-        try (Connection conn = Conexao.conexao();
-        PreparedStatement stmt = conn.prepareStatement(query)){
-            stmt.setString(1, email);
-
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()){
-                return true;
-            }
-        }
-        return false;
-    }
-
     // VERIFICAR EXISTENCIA
     public boolean verificarExistenciaId(int id) throws SQLException{
         String query = "SELECT id FROM aluno WHERE id = ?";

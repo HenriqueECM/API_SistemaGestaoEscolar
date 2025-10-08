@@ -1,7 +1,7 @@
 package com.example.gestaoEscolar.mapper;
 
-import com.example.gestaoEscolar.dto.turma.CriarRequisicaoTurmaDto;
-import com.example.gestaoEscolar.dto.turma.CriarRespostaTurmaDto;
+import com.example.gestaoEscolar.dto.request.CriarRequisicaoTurmaDto;
+import com.example.gestaoEscolar.dto.response.CriarRespostaTurmaDto;
 import com.example.gestaoEscolar.model.Turma;
 import org.springframework.stereotype.Component;
 

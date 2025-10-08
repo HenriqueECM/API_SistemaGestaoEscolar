@@ -2,12 +2,14 @@ package com.example.gestaoEscolar.repository;
 
 import com.example.gestaoEscolar.database.Conexao;
 import com.example.gestaoEscolar.model.Aula;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class AulaDAO {
     public Aula create (Aula aula)throws SQLException {
         String query = "INSERT INTO aula (turma_id, data_hora, assunto) VALUES (?,?,?)";
@@ -52,6 +54,22 @@ public class AulaDAO {
 
             stmt.executeUpdate();
         }
+    }
+
+    public boolean verificarExistencia (int id) throws SQLException {
+        String query = "SELECT id, turma_id, data_hora, assunto FROM aula WHERE id = ?";
+
+        try (Connection conn = Conexao.conexao();
+        PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<Aula> buscarTodos()throws SQLException {

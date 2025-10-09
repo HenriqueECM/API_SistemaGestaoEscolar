@@ -4,10 +4,7 @@ import com.example.gestaoEscolar.database.Conexao;
 import com.example.gestaoEscolar.model.Turma;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +14,18 @@ public class TurmaDAO {
         String query = "INSERT INTO turma (nome, curso_id, professor_id) VALUES (?,?,?)";
 
         try (Connection conn = Conexao.conexao();
-             PreparedStatement stmt = conn.prepareStatement(query)){
+             PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)){
             stmt.setString(1, turma.getNome());
             stmt.setInt(2, turma.getCursoId());
             stmt.setInt(3, turma.getProfessorId());
 
             stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+
+            if (rs.next()){
+                turma.setId(rs.getInt(1));
+            }
         }
         return turma;
     }

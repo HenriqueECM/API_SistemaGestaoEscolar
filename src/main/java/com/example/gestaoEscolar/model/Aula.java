@@ -5,19 +5,28 @@ import java.time.LocalDateTime;
 public class Aula {
     private int id, turma_id;
     private LocalDateTime dataHora;
-    private String assunto;
+    private String assunto, nomeTurma;
 
-    public Aula(int id, int turma_id, LocalDateTime dataHora, String assunto) {
+    public Aula(int id, int turma_id, String nomeTurma, LocalDateTime dataHora, String assunto) {
         this.id = id;
         this.turma_id = turma_id;
         this.dataHora = dataHora;
         this.assunto = assunto;
+        this.nomeTurma = nomeTurma;
     }
 
     public Aula(int turma_id, LocalDateTime dataHora, String assunto) {
         this.turma_id = turma_id;
         this.dataHora = dataHora;
         this.assunto = assunto;
+    }
+
+    public String getNomeTurma() {
+        return nomeTurma;
+    }
+
+    public void setNomeTurma(String nomeTurma) {
+        this.nomeTurma = nomeTurma;
     }
 
     public int getId() {

@@ -51,7 +51,7 @@ public class AulaController {
         }
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<CriarRespostaAulaDto> buscarPorID(@PathVariable int id){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(service.buscarPorId(id));

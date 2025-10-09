@@ -3,7 +3,9 @@ package com.example.gestaoEscolar.mapper;
 import com.example.gestaoEscolar.dto.request.CriarRequisicaoAulaDto;
 import com.example.gestaoEscolar.dto.response.CriarRespostaAulaDto;
 import com.example.gestaoEscolar.model.Aula;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AulaMapper {
     public Aula paraEntidade(CriarRequisicaoAulaDto requisicaoAulaDto){
         return new Aula(requisicaoAulaDto.turma_id(), requisicaoAulaDto.dataHora(), requisicaoAulaDto.assunto());
@@ -26,6 +28,6 @@ public class AulaMapper {
     }
 
     public CriarRespostaAulaDto paraResposta(Aula aula){
-        return new CriarRespostaAulaDto(aula.getId(), aula.getTurma_id(), aula.getDataHora(), aula.getAssunto());
+        return new CriarRespostaAulaDto(aula.getId(), aula.getNomeTurma(), aula.getDataHora(), aula.getAssunto());
     }
 }

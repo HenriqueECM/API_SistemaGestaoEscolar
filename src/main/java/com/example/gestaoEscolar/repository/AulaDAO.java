@@ -27,8 +27,17 @@ public class AulaDAO {
             if (rs.next()){
                 aula.setId(rs.getInt(1));
             }
+
+//            String turmaQuery = "SELECT nome FROM turma WHERE id = ?";
+//            try (PreparedStatement turmaStmt = conn.prepareStatement(turmaQuery)) {
+//                turmaStmt.setInt(1, aula.getTurma_id());
+//                ResultSet turmaRs = turmaStmt.executeQuery();
+//                if (turmaRs.next()) {
+//                    aula.setNomeTurma(turmaRs.getString("nome"));
+//                }
+//            }
         }
-        return aula;
+        return buscarPorId(aula.getId());
     }
 
     public Aula update (Aula aula)throws SQLException {
@@ -73,7 +82,11 @@ public class AulaDAO {
     }
 
     public List<Aula> buscarTodos()throws SQLException {
-        String query = "SELECT id, turma_id, data_hora, assunto FROM aula";
+        String query = """
+            SELECT a.id, a.turma_id, t.nome AS nome_turma, a.data_hora, a.assunto
+            FROM aula a
+            JOIN turma t ON a.turma_id = t.id
+        """;
 
         List<Aula> aulaList = new ArrayList<>();
 
@@ -84,10 +97,11 @@ public class AulaDAO {
             while (rs.next()){
                 int id = rs.getInt("id");
                 int turmaId = rs.getInt("turma_id");
+                String nomeTurma = rs.getString("nome_turma");
                 LocalDateTime dataHora = rs.getTimestamp("data_hora").toLocalDateTime();
                 String assunto = rs.getString("assunto");
 
-                var aula = new Aula(id, turmaId, dataHora, assunto);
+                var aula = new Aula(id, turmaId, nomeTurma, dataHora, assunto);
                 aulaList.add(aula);
             }
         }
@@ -95,7 +109,12 @@ public class AulaDAO {
     }
 
     public Aula buscarPorId(int id) throws SQLException {
-        String query = "SELECT id, turma_id, data_hora, assunto FROM aula WHERE id = ?";
+        String query = """
+            SELECT a.id, a.turma_id, t.nome AS nome_turma, a.data_hora, a.assunto
+            FROM aula a
+            JOIN turma t ON a.turma_id = t.id
+            WHERE a.id = ?
+        """;
 
         try (Connection conn = Conexao.conexao();
         PreparedStatement stmt = conn.prepareStatement(query)){
@@ -106,10 +125,11 @@ public class AulaDAO {
             if (rs.next()){
                 int idNew = rs.getInt("id");
                 int turmaId = rs.getInt("turma_id");
+                String nomeTurma = rs.getString("nome_turma");
                 LocalDateTime dataHora = rs.getTimestamp("data_hora").toLocalDateTime();
                 String assunto  = rs.getString("assunto");
 
-                return new Aula(idNew, turmaId, dataHora, assunto);
+                return new Aula(idNew, turmaId, nomeTurma, dataHora, assunto);
             }
             return null;
         }

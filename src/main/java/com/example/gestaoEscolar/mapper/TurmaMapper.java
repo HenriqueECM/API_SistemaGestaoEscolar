@@ -3,12 +3,15 @@ package com.example.gestaoEscolar.mapper;
 import com.example.gestaoEscolar.dto.request.CriarRequisicaoTurmaDto;
 import com.example.gestaoEscolar.dto.response.CriarRespostaTurmaDto;
 import com.example.gestaoEscolar.model.Turma;
+import com.example.gestaoEscolar.model.TurmaResposta;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class TurmaMapper {
     public Turma paraEntidade(CriarRequisicaoTurmaDto requisicaoDto){
-        return new Turma(requisicaoDto.cursoId(), requisicaoDto.professorId(), requisicaoDto.nome());
+        return new Turma(requisicaoDto.nome(), requisicaoDto.cursoId(), requisicaoDto.professorId());
     }
 
     public Turma verificarUpdate(CriarRequisicaoTurmaDto requisicaoDto, Turma turma){
@@ -27,7 +30,7 @@ public class TurmaMapper {
         return turma;
     }
 
-    public CriarRespostaTurmaDto paraResposta (Turma turma) {
-        return new CriarRespostaTurmaDto(turma.getId(), turma.getCursoId(), turma.getProfessorId(), turma.getNome());
+    public CriarRespostaTurmaDto paraResposta(TurmaResposta turma, List<String> nomeAlunos) {
+        return new CriarRespostaTurmaDto(turma.getId(), turma.getNome(), turma.getNomeCurso(), turma.getNomeProfessor(), nomeAlunos);
     }
 }

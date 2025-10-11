@@ -1,4 +1,12 @@
 package com.example.gestaoEscolar.dto.response;
 
-public record CriarRespostaTurmaDto(int id, int cursoId, int professorId, String nome) {
+import java.util.List;
+
+public record CriarRespostaTurmaDto(
+        int id,
+        String nome,
+        String nomeCurso,
+        String nomeProfessor,
+        List<String> nomeAlunos
+) {
 }

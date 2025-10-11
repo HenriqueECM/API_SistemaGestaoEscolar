@@ -4,14 +4,14 @@ public class Turma {
     private int id, cursoId, professorId;
     private String nome;
 
-    public Turma(int id, int cursoId, int professorId, String nome) {
+    public Turma(int id,String nome, int cursoId, int professorId) {
         this.id = id;
         this.cursoId = cursoId;
         this.professorId = professorId;
         this.nome = nome;
     }
 
-    public Turma(int cursoId, int professorId, String nome) {
+    public Turma(String nome, int cursoId, int professorId) {
         this.cursoId = cursoId;
         this.professorId = professorId;
         this.nome = nome;

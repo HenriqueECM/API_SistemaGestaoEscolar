@@ -114,7 +114,7 @@ public class TurmaDAO {
     public List<String> buscarListaNomesPorId(List<Integer> idsAlunos) throws SQLException {
         String query = """
                 SELECT nome
-                FROM aluno 
+                FROM aluno
                 WHERE id IN """ + GerarIn.gerando(idsAlunos.size());
 
 

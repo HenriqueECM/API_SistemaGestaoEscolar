@@ -121,8 +121,7 @@ public class CursoDAO {
                 FROM professor p
                 LEFT JOIN turma t
                 ON p.id = t.professor_id
-                WHERE p.id IN """+ GerarIn.gerando(idsProfessores.size());
-        String var = GerarIn.gerando(idsProfessores.size());
+                WHERE p.id IN""" + GerarIn.gerando(idsProfessores.size());
 
         List<String> nomeProfessores = new ArrayList<>();
 

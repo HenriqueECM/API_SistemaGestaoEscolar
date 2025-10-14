@@ -71,74 +71,6 @@ public class TurmaDAO {
         return false;
     }
 
-    public List<Turma> buscarTodos() throws SQLException {
-        List<Turma> turmaList = new ArrayList<>();
-        String query = "SELECT id, nome, curso_id, professor_id FROM turma";
-        try (Connection conn = Conexao.conexao();
-        PreparedStatement stmt = conn.prepareStatement(query)){
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()){
-                int id = rs.getInt("id");
-                String nome = rs.getString("nome");
-                int cursoId = rs.getInt("curso_id");
-                int professorId = rs.getInt("professor_id");
-
-                var turma = new Turma(id, nome, cursoId, professorId);
-                turmaList.add(turma);
-            }
-        }
-        return turmaList;
-    }
-
-    public Turma buscarPorId(int id) throws SQLException{
-        String query = "SELECT id, nome, curso_id, professor_id FROM turma WHERE id = ?";
-        try (Connection conn = Conexao.conexao();
-        PreparedStatement stmt = conn.prepareStatement(query)){
-            stmt.setInt(1, id);
-
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()){
-                int newId = rs.getInt("id");
-                String nome = rs.getString("nome");
-                int cursoId = rs.getInt("curso_id");
-                int professorId = rs.getInt("professor_id");
-
-                return new Turma(newId,nome, cursoId, professorId);
-            }
-        }
-        return null;
-    }
-
-    public List<String> buscarListaNomesPorId(List<Integer> idsAlunos) throws SQLException {
-        String query = """
-                SELECT nome
-                FROM aluno
-                WHERE id IN """ + GerarIn.gerando(idsAlunos.size());
-
-
-        List<String> nomeAlunos = new ArrayList<>();
-
-        try (Connection conn = Conexao.conexao();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            String nome = "";
-
-            for (int i = 0; i < idsAlunos.size(); i++) {
-                stmt.setInt(i + 1, idsAlunos.get(i));
-            }
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                nome = rs.getString("nome");
-                nomeAlunos.add(nome);
-            }
-
-        }
-        return nomeAlunos;
-    }
-
     public void inserirAlunosTurma (int idTurma, List<Integer> idAlunos) throws SQLException {
         String query = """
                 INSERT INTO turma_aluno
@@ -195,5 +127,97 @@ public class TurmaDAO {
             }
         }
         return turmaResposta;
+    }
+
+    public List<String> buscarListaNomeAlunosPorTurma(int idTurma) throws SQLException {
+        String query = """
+                SELECT a.nome
+                FROM turma_aluno t
+                JOIN aluno a
+                ON t.aluno_id = a.id
+                WHERE t.turma_id = ?""";
+
+
+        List<String> nomeAlunos = new ArrayList<>();
+
+        try (Connection conn = Conexao.conexao();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1,idTurma);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String nome = rs.getString("nome");
+                nomeAlunos.add(nome);
+            }
+
+        }
+        return nomeAlunos;
+    }
+
+    public List<TurmaResposta> buscarTurmas() throws SQLException {
+        String query = """
+                        SELECT t.id
+                        , t.nome
+                        , t.curso_id
+                        , t.professor_id
+                        , p.nome as professor
+                        , c.nome as curso
+                        FROM turma t
+                        LEFT JOIN professor p
+                        ON  t.professor_id = p.id
+                        LEFT JOIN curso c
+                        ON c.id = t.curso_id
+                        """;
+        List<TurmaResposta> turmaRespostas = new ArrayList<>();
+
+
+        try (Connection conn = Conexao.conexao();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                int newId = rs.getInt("id");
+                String nome = rs.getString("nome");
+                int cursoId = rs.getInt("curso_id");
+                int professorId = rs.getInt("professor_id");
+                String nomeProfessor = rs.getString("professor");
+                String nomeCurso = rs.getString("curso");
+
+                var turma = new Turma(newId, nome, cursoId, professorId);
+                var turmaResposta = new TurmaResposta(turma,nomeProfessor, nomeCurso);
+                turmaRespostas.add(turmaResposta);
+            }
+        }
+        return turmaRespostas;
+    }
+
+    public List<String> buscarListaNomesPorId(List<Integer> idsAlunos) throws SQLException {
+        String query = """
+                SELECT nome
+                FROM aluno
+                WHERE id IN""" + GerarIn.gerando(idsAlunos.size());
+
+
+        List<String> nomeAlunos = new ArrayList<>();
+
+        try (Connection conn = Conexao.conexao();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            String nome = "";
+
+            for (int i = 0; i < idsAlunos.size(); i++) {
+                stmt.setInt(i + 1, idsAlunos.get(i));
+            }
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                nome = rs.getString("nome");
+                nomeAlunos.add(nome);
+            }
+
+        }
+        return nomeAlunos;
     }
 }

@@ -38,17 +38,17 @@ public class TurmaController {
 //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 //        }
 //    }
-//
-//    @GetMapping
-//    public ResponseEntity<List<CriarRespostaTurmaDto>> get() {
-//        try {
-//            return ResponseEntity.status(HttpStatus.OK).body(service.buscarTodos());
-//        } catch (SQLException e){
-//            e.printStackTrace();
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
-//    }
-//
+
+    @GetMapping
+    public ResponseEntity<List<CriarRespostaTurmaDto>> get() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(service.buscarTodos());
+        } catch (SQLException e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 //    @GetMapping("/{id}")
 //    public ResponseEntity<CriarRespostaTurmaDto> getById(@PathVariable int id) {
 //        try {
@@ -58,15 +58,15 @@ public class TurmaController {
 //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 //        }
 //    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> delete (@PathVariable int id) {
-//        try {
-//            service.delete(id);
-//            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-//        } catch (SQLException e){
-//            e.printStackTrace();
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
-//    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete (@PathVariable int id) {
+        try {
+            service.delete(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (SQLException e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

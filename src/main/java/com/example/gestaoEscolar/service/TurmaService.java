@@ -36,6 +36,27 @@ public class TurmaService {
         return mapper.paraResposta(turmaResposta, nomeAluno);
     }
 
+    public List<CriarRespostaTurmaDto> buscarTodos() throws SQLException {
+        List<TurmaResposta> turmaList = repository.buscarTurmas();
+        List<CriarRespostaTurmaDto> respostaTurmaDtos = new ArrayList<>();
+
+        for (TurmaResposta turma : turmaList){
+            List<String> nomeAlunos = repository.buscarListaNomeAlunosPorTurma(turma.getId());
+            respostaTurmaDtos.add(mapper.paraResposta(turma, nomeAlunos));
+        }
+        return respostaTurmaDtos;
+    }
+
+//    public CriarRespostaTurmaDto buscarPorId(int id) throws SQLException {
+//        Turma turma = repository.buscarPorId(id);
+//
+//        if (turma == null){
+//            throw new RuntimeException("Turma ID " + id + " não encontrado");
+//        }
+//
+//        return mapper.paraResposta((TurmaResposta) turma, null);
+//    }
+
 //    public CriarRespostaTurmaDto update (int id, CriarRequisicaoTurmaDto requisitaoDto) throws SQLException {
 //        Turma turma = repository.buscarPorId(id);
 //
@@ -45,31 +66,11 @@ public class TurmaService {
 //
 //        return mapper.paraResposta(repository.update(mapper.verificarUpdate(requisitaoDto, turma)));
 //    }
-//
-//    public void delete (int id) throws SQLException {
-//        if (!repository.verificarExistencia(id)){
-//            throw new RuntimeException("Turma ID " + id + " não encontrado");
-//        }
-//        repository.delete(id);
-//    }
-//
-//    public List<CriarRespostaTurmaDto> buscarTodos() throws SQLException {
-//        List<Turma> turmaList = repository.buscarTodos();
-//        List<CriarRespostaTurmaDto> respostaTurmaDtos = new ArrayList<>();
-//
-//        turmaList.forEach(turma -> {
-//            respostaTurmaDtos.add(mapper.paraResposta(turma));
-//        });
-//        return respostaTurmaDtos;
-//    }
-//
-//    public CriarRespostaTurmaDto buscarPorId(int id) throws SQLException {
-//        Turma turma = repository.buscarPorId(id);
-//
-//        if (turma == null){
-//            throw new RuntimeException("Turma ID " + id + " não encontrado");
-//        }
-//
-//        return mapper.paraResposta(turma);
-//    }
+
+    public void delete (int id) throws SQLException {
+        if (!repository.verificarExistencia(id)){
+            throw new RuntimeException("Turma ID " + id + " não encontrado");
+        }
+        repository.delete(id);
+    }
 }

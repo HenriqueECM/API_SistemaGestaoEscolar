@@ -47,15 +47,17 @@ public class TurmaService {
         return respostaTurmaDtos;
     }
 
-//    public CriarRespostaTurmaDto buscarPorId(int id) throws SQLException {
-//        Turma turma = repository.buscarPorId(id);
-//
-//        if (turma == null){
-//            throw new RuntimeException("Turma ID " + id + " não encontrado");
-//        }
-//
-//        return mapper.paraResposta((TurmaResposta) turma, null);
-//    }
+    public CriarRespostaTurmaDto buscarPorId(int id) throws SQLException {
+        TurmaResposta turma = repository.buscarTurmasPorId(id);
+
+        if (turma == null){
+            throw new RuntimeException("Turma ID " + id + " não encontrado");
+        }
+
+        List<String> nomeAlunos = repository.buscarListaNomeAlunosPorTurma(turma.getId());
+
+        return mapper.paraResposta(turma, nomeAlunos);
+    }
 
 //    public CriarRespostaTurmaDto update (int id, CriarRequisicaoTurmaDto requisitaoDto) throws SQLException {
 //        Turma turma = repository.buscarPorId(id);

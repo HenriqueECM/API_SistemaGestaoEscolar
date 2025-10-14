@@ -23,9 +23,13 @@ public class CursoService {
 
     // METODO CREATE
     public CriarRespostaCursoDto create (CriarRequisicaoCursoDto requisicaoCursoDto) throws SQLException {
-        List<String> nomeProfessores = repository.listaProfessoresNome(requisicaoCursoDto.listaProfessorIds());
+        Curso curso = mapper.paraEntidade(requisicaoCursoDto);
 
-        return mapper.paraResposta(repository.create(mapper.paraEntidade(requisicaoCursoDto)), nomeProfessores);
+        Curso newCurso = repository.create(curso);
+
+        List<String> nomeProfessor = repository.buscarListaNomesPorId(requisicaoCursoDto.listaProfessorIds());
+
+        return mapper.paraResposta(newCurso, nomeProfessor);
     }
 
     // METODO UPDATE
@@ -56,7 +60,9 @@ public class CursoService {
             throw new RuntimeException("Curso ID " + id + " não encontrado");
         }
 
-        return mapper.paraResposta(curso, null);
+        List<String> nomeProfessor = repository.buscarListaNomes();
+
+        return mapper.paraResposta(curso, nomeProfessor);
     }
 
     // METODO BUSCAR TODOS
@@ -64,9 +70,10 @@ public class CursoService {
         List<Curso> cursoList = repository.buscarTodos();
         List<CriarRespostaCursoDto> respostaCursoDtos = new ArrayList<>();
 
-        cursoList.forEach(curso -> {
-            respostaCursoDtos.add(mapper.paraResposta(curso, null));
-        });
+        for (Curso curso : cursoList){
+            List<String> nomeProfessor = repository.buscarListaNomes();
+            respostaCursoDtos.add(mapper.paraResposta(curso, nomeProfessor));
+        }
         return respostaCursoDtos;
     }
 }

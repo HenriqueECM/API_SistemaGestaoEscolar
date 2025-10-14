@@ -157,6 +157,7 @@ public class TurmaDAO {
         }
     }
 
+    // AQUI VOU FAZER BUSCAR ONDE VAI MOSTRAR cursoId para nomeCurso NA LISTA
     public TurmaResposta buscarTurmasPorId(int id) throws SQLException {
         String query = """
                         SELECT t.id
@@ -165,8 +166,8 @@ public class TurmaDAO {
                         , t.professor_id
                         , p.nome as professor
                         , c.nome as curso
-                        FROM turma t 
-                        LEFT JOIN professor p 
+                        FROM turma t
+                        LEFT JOIN professor p
                         ON  t.professor_id = p.id
                         LEFT JOIN curso c
                         ON c.id = t.curso_id
